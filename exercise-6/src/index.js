@@ -13,12 +13,27 @@ const ButtonBox = ({clickGood, clickNeutral, clickBad}) => {
 }
 
 const StatisticsBox = ({good, neutral, bad}) => {
+  let positive = 0; 
+  let average = 0;
+
+  if(good > bad) average = 1
+  else if(good < bad) average = -1;
+  else average = 0;
+
+  if(good === 0) {
+    positive = 0;
+  } else {
+    positive = good * 100 / (good + neutral + bad);
+  }
   return(
     <div>
       <h2>Statistics</h2>
       <p>Good: <span>{good}</span></p>
       <p>Neutral: <span>{neutral}</span></p>
       <p>Bad: <span>{bad}</span></p>
+      <p>All: {good + neutral + bad}</p>
+      <p>Average: {average}</p>
+      <p>Positive: {positive}%</p>
 
     </div>
   )
