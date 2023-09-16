@@ -12,6 +12,14 @@ const ButtonBox = ({ clickGood, clickNeutral, clickBad }) => {
     );
 };
 
+const StatisticsLine = ({ statisticName, statisticCounter }) => {
+    return (
+        <p>
+            {statisticName} {statisticCounter}
+        </p>
+    );
+};
+
 const StatisticsBox = ({ good, neutral, bad }) => {
     let positive = 0;
     let average = 0;
@@ -24,6 +32,7 @@ const StatisticsBox = ({ good, neutral, bad }) => {
         positive = 0;
     } else {
         positive = (good * 100) / (good + neutral + bad);
+        positive = positive.toString().concat(" %");
     }
     if (good === 0 && neutral === 0 && bad === 0)
         return (
@@ -36,18 +45,27 @@ const StatisticsBox = ({ good, neutral, bad }) => {
         return (
             <div>
                 <h2>Statistics</h2>
-                <p>
-                    Good: <span>{good}</span>
-                </p>
-                <p>
-                    Neutral: <span>{neutral}</span>
-                </p>
-                <p>
-                    Bad: <span>{bad}</span>
-                </p>
-                <p>All: {good + neutral + bad}</p>
-                <p>Average: {average}</p>
-                <p>Positive: {positive}%</p>
+                <StatisticsLine
+                    statisticName="Good"
+                    statisticCounter={good}
+                />
+                <StatisticsLine
+                    statisticName="Neutrar"
+                    statisticCounter={neutral}
+                />
+                <StatisticsLine statisticName="Bad" statisticCounter={bad} />
+                <StatisticsLine
+                    statisticName="All"
+                    statisticCounter={good + neutral + bad}
+                />
+                <StatisticsLine
+                    statisticName="Average"
+                    statisticCounter={average}
+                />
+                <StatisticsLine
+                    statisticName="Positive"
+                    statisticCounter={positive}
+                />
             </div>
         );
 };
