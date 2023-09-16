@@ -6,13 +6,23 @@ const rootElement = createRoot(root);
 
 const Button = ({ text, handleMouse }) => (
   <button onClick={handleMouse}>{text}</button>
-);
+  );
 
-
-const App = (props) => {
+  
+  const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
 
-  const getRandomIndex = () => setSelected((selected)=> {
+  const giveVote = () => setPoints(()=>{
+    let newPoints = points
+    newPoints[selected] += 1;
+    console.log('points :>> ', points);
+    return newPoints;
+  })
+
+  console.log('points :>> ', points);
+
+  const getRandomIndex = () => setSelected(()=> {
     let randomIndex = Math.floor(Math.random() * anecdotes.length)
     if(randomIndex === selected) randomIndex = Math.floor(Math.random() * anecdotes.length) //conditional that prevents the random number from being repeated again if it was already selected
 
@@ -20,11 +30,13 @@ const App = (props) => {
   }
   )
 
+  
   console.log('select :>> ', selected);
   return (
     <div>
-      <p>{props.anecdotes[selected]}</p>
+      <p>{anecdotes[selected]}</p>
       <Button text="Next Anecdote" handleMouse={getRandomIndex} />
+      <Button text="Vote" handleMouse={giveVote} />
     </div>
   )
 }
@@ -38,5 +50,6 @@ const anecdotes = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
+
 rootElement.render(<App anecdotes={anecdotes} />);
-console.log('anecdotes. :>> ', anecdotes.length);
+console.log('anecdote.length:>> ', anecdotes.length);
