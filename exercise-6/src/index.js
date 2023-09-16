@@ -14,9 +14,10 @@ const ButtonBox = ({ clickGood, clickNeutral, clickBad }) => {
 
 const StatisticsLine = ({ statisticName, statisticCounter }) => {
     return (
-        <p>
-            {statisticName} {statisticCounter}
-        </p>
+        <tr>
+            <td>{statisticName}</td>
+            <td>{statisticCounter}</td>
+        </tr>
     );
 };
 
@@ -45,27 +46,34 @@ const StatisticsBox = ({ good, neutral, bad }) => {
         return (
             <div>
                 <h2>Statistics</h2>
-                <StatisticsLine
-                    statisticName="Good"
-                    statisticCounter={good}
-                />
-                <StatisticsLine
-                    statisticName="Neutrar"
-                    statisticCounter={neutral}
-                />
-                <StatisticsLine statisticName="Bad" statisticCounter={bad} />
-                <StatisticsLine
-                    statisticName="All"
-                    statisticCounter={good + neutral + bad}
-                />
-                <StatisticsLine
-                    statisticName="Average"
-                    statisticCounter={average}
-                />
-                <StatisticsLine
-                    statisticName="Positive"
-                    statisticCounter={positive}
-                />
+                <table>
+                    <tbody>
+                        <StatisticsLine
+                            statisticName="Good"
+                            statisticCounter={good}
+                        />
+                        <StatisticsLine
+                            statisticName="Neutrar"
+                            statisticCounter={neutral}
+                        />
+                        <StatisticsLine
+                            statisticName="Bad"
+                            statisticCounter={bad}
+                        />
+                        <StatisticsLine
+                            statisticName="All"
+                            statisticCounter={good + neutral + bad}
+                        />
+                        <StatisticsLine
+                            statisticName="Average"
+                            statisticCounter={average}
+                        />
+                        <StatisticsLine
+                            statisticName="Positive"
+                            statisticCounter={positive}
+                        />
+                    </tbody>
+                </table>
             </div>
         );
 };
