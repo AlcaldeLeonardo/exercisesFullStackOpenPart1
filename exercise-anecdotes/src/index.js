@@ -4,6 +4,18 @@ import { createRoot } from 'react-dom/client'
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
+const MostVotedAnecdote = ({anecdotes, points}) => {
+  let maxVotes = Math.max(...points)
+
+  let indexMostVoted = points.findIndex(valor => valor === maxVotes)
+  return (
+    <div>
+      <h2>Anecdote With Most Votes</h2>
+      <p>{anecdotes[indexMostVoted]}</p>
+    </div>
+  )
+}
+
 const Button = ({ text, handleMouse }) => (
   <button onClick={handleMouse}>{text}</button>
   );
@@ -14,7 +26,7 @@ const Button = ({ text, handleMouse }) => (
   const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
 
   const giveVote = () => setPoints(()=>{
-    let newPoints = points
+    let newPoints = [...points]
     newPoints[selected] += 1;
     console.log('points :>> ', points);
     return newPoints;
@@ -34,9 +46,11 @@ const Button = ({ text, handleMouse }) => (
   console.log('select :>> ', selected);
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       <p>{anecdotes[selected]}</p>
       <Button text="Next Anecdote" handleMouse={getRandomIndex} />
       <Button text="Vote" handleMouse={giveVote} />
+      <MostVotedAnecdote anecdotes = {anecdotes} points = {points}/>
     </div>
   )
 }
